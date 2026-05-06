@@ -1,1 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Download — gpcc</title>
+  <style>
+    body{font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;background:#f6fbff;color:#0b1220;margin:0}
+    header{background:#fff;padding:14px 20px;border-bottom:1px solid #e6eef8}
+    header h1{margin:0}
+    .wrap{max-width:980px;margin:26px auto;padding:0 20px}
+    .card{background:#fff;padding:18px;border-radius:10px;margin-bottom:16px;box-shadow:0 6px 18px rgba(18,43,78,0.05)}
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:10px;border-bottom:1px solid #eef6ff;text-align:left}
+    .muted{color:#6b7280;font-size:14px}
+    pre{background:#0b1220;color:#e6f0ff;padding:12px;border-radius:6px;overflow:auto}
+    .note{background:#fff7e6;padding:12px;border-radius:8px;border-left:4px solid #ffb020}
+    a.btn{display:inline-block;padding:8px 12px;background:#1e90ff;color:#fff;border-radius:8px;text-decoration:none}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>gpcc downloads</h1>
+  </header>
 
+  <main class="wrap">
+    <section class="card">
+      <h2>Stable Releases</h2>
+      <p class="muted">Binary packages and source tarballs are provided for each release. Replace example URLs below with your real release assets when you publish on GitHub Releases.</p>
+
+      <table>
+        <thead>
+          <tr><th>File</th><th>Platform</th><th>Size</th><th>SHA-256</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="https://github.com/c-to-the-power-of-plus-plus/source/releases/download/v0.3.0/gpcc-0.3.0-linux-x86_64.tar.gz">gpcc-0.3.0-linux-x86_64.tar.gz</a></td>
+            <td>Linux x86_64</td>
+            <td>6.3 MB</td>
+            <td><code>EXAMPLE_SHA256_1</code></td>
+          </tr>
+          <tr>
+            <td><a href="https://github.com/c-to-the-power-of-plus-plus/source/releases/download/v0.3.0/gpcc-0.3.0-windows-x86_64.zip">gpcc-0.3.0-windows-x86_64.zip</a></td>
+            <td>Windows x86_64</td>
+            <td>7.1 MB</td>
+            <td><code>EXAMPLE_SHA256_2</code></td>
+          </tr>
+          <tr>
+            <td><a href="https://github.com/c-to-the-power-of-plus-plus/source/archive/refs/tags/v0.3.0.tar.gz">source v0.3.0 (tar.gz)</a></td>
+            <td>Source</td>
+            <td>1.0 MB</td>
+            <td><code>EXAMPLE_SHA256_3</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h3>Verify downloads</h3>
+      <ol>
+        <li>Download the asset and the corresponding <code>.sha256</code> file from the same release.</li>
+        <li>Run:
+          <pre><code>sha256sum gpcc-0.3.0-linux-x86_64.tar.gz
+# or on macOS
+shasum -a 256 gpcc-0.3.0-macos.tar.gz
+</code></pre>
+        </li>
+        <li>Optionally verify a detached GPG signature (if provided):
+          <pre><code>gpg --keyserver hkps://keys.openpgp.org --recv-keys YOUR_PGP_KEY_ID
+gpg --verify gpcc-0.3.0-linux-x86_64.tar.gz.asc gpcc-0.3.0-linux-x86_64.tar.gz
+</code></pre>
+        </li>
+      </ol>
+      <p class="muted">We recommend verifying checksums and signatures for production use.</p>
+    </section>
+
+    <section class="card">
+      <h3>Install from source</h3>
+      <p>To build gpcc from source on Unix-like systems:</p>
+      <pre><code>git clone https://github.com/c-to-the-power-of-plus-plus/source.git
+cd source
+make
+# Optionally install to /usr/local
+sudo make install
+</code></pre>
+      <p class="muted">The project uses a simple Makefile. On Windows you can use MSYS2 or WSL to build, or download the prebuilt zip.</p>
+    </section>
+
+    <section class="card note">
+      <h4>Notes for package maintainers</h4>
+      <ul>
+        <li>Provide deterministic builds where possible.</li>
+        <li>Add gpcc to Homebrew (macOS) and community package repos for Linux distributions.</li>
+        <li>Sign releases with a PGP key and publish fingerprint on the website.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer style="text-align:center;padding:18px;color:#6b7280">Need CI artifacts or nightly builds? See the project's GitHub Actions or open an issue requesting additional targets.</footer>
+</body>
+</html>
