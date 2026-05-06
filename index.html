@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>C^{++} — Home</title>
+  <style>
+    :root{--accent:#1e90ff;--bg:#f7fbff;--muted:#6b7280;font-family:Inter,system-ui,Segoe UI,Arial,sans-serif}
+    body{margin:0;background:var(--bg);color:#0b1220;line-height:1.5}
+    header{background:#fff;border-bottom:1px solid #e6eef8;padding:18px 24px;display:flex;align-items:center;justify-content:space-between}
+    header h1{margin:0;font-size:20px}
+    nav a{margin-left:14px;color:var(--accent);text-decoration:none}
+    .wrap{max-width:980px;margin:28px auto;padding:0 20px}
+    .card{background:#fff;border-radius:10px;padding:20px;margin-bottom:18px;box-shadow:0 6px 18px rgba(18,43,78,0.06)}
+    .grid{display:grid;grid-template-columns:1fr 320px;gap:18px}
+    pre{background:#0b1220;color:#e6f0ff;padding:12px;border-radius:6px;overflow:auto}
+    .btn{display:inline-block;padding:10px 14px;border-radius:8px;background:var(--accent);color:#fff;text-decoration:none}
+    footer{padding:18px 24px;text-align:center;color:var(--muted);font-size:14px}
+    @media(max-width:900px){.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>C<sup>++</sup> — the modern C language + safe extensions</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="docs.html">Docs</a>
+      <a href="lang-spec.html">Spec</a>
+      <a href="gpcc-guide.html">gpcc</a>
+      <a href="download.html">Download</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="card grid">
+      <div>
+        <h2>What is C<sup>++</sup>?</h2>
+        <p>C<sup>++</sup> is a small, carefully extended dialect of C that keeps C compatibility while adding ergonomics, stronger typing in key places, and safe language features meant for modern systems programming. It compiles with the gpcc compiler which focuses on fast builds, small runtime, and predictable code generation.</p>
+
+        <h3>Quickstart</h3>
+        <p>Create hello.cp (C<sup>++</sup> source):</p>
+        <pre><code>// hello.cp
+#include &lt;stdio.h&gt;
+
+func main() : int {
+  println("Hello, C^++!");
+  return 0;
+}
+</code></pre>
+
+        <p>Build with gpcc:</p>
+        <pre><code>git clone https://github.com/c-to-the-power-of-plus-plus/source.git
+cd source
+make
+./gpcc -o hello hello.cp
+./hello
+</code></pre>
+
+        <p><a class="btn" href="download.html">Download gpcc</a> <a class="btn" href="docs.html" style="background:#0b1220">Read docs</a></p>
+      </div>
+
+      <aside>
+        <h3>Latest release</h3>
+        <p><strong>v0.3.0</strong> — small improvements to pattern matching and optimizer. See <a href="download.html">Download</a>.</p>
+
+        <h3>Links</h3>
+        <ul>
+          <li><a href="lang-spec.html">Language spec</a></li>
+          <li><a href="gpcc-guide.html">Compiler guide</a></li>
+          <li><a href="https://github.com/c-to-the-power-of-plus-plus/source">Source repo</a></li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="card">
+      <h3>Get involved</h3>
+      <p>We welcome issues, PRs, and design discussions. Read the CONTRIBUTING file in the repository for guidelines and run the test suite before opening a PR.</p>
+    </section>
+  </main>
+
+  <footer>
+    © C<sup>++</sup> language project — gpcc compiler — See repository at github.com/c-to-the-power-of-plus-plus/source
+  </footer>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>gpcc — Compiler Guide</title>
+  <style>
+    body{font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;background:#fbfeff;margin:0;color:#0b1220}
+    header{background:#fff;padding:12px 16px;border-bottom:1px solid #e6eef8}
+    .wrap{max-width:980px;margin:18px auto;padding:0 16px}
+    .card{background:#fff;padding:16px;border-radius:10px;margin-bottom:12px;box-shadow:0 8px 20px rgba(18,43,78,0.04)}
+    pre{background:#0b1220;color:#e6f0ff;padding:12px;border-radius:8px;overflow:auto}
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:8px;border-bottom:1px solid #eef6ff;text-align:left}
+    .muted{color:#6b7280}
+  </style>
+</head>
+<body>
+  <header><h1>gpcc — Compiler Guide</h1></header>
+
+  <main class="wrap">
+    <section class="card">
+      <h2>Basic usage</h2>
+      <pre><code># Compile single file to executable
+gpcc -o prog prog.cp
+
+# Compile to object file
+gpcc -c prog.cp -o prog.o
+
+# Link object files
+gpcc prog.o other.o -o final
+</code></pre>
+      <p class="muted">gpcc accepts C-like flags and some additional high-level flags described below.</p>
+    </section>
+
+    <section class="card">
+      <h2>Important flags</h2>
+      <table>
+        <thead><tr><th>Flag</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td>-o &lt;file&gt;</td><td>Output file</td></tr>
+          <tr><td>-c</td><td>Compile only (no link)</td></tr>
+          <tr><td>-O0 / -O1 / -O2 / -O3</td><td>Optimization level</td></tr>
+          <tr><td>-g</td><td>Include debug info</td></tr>
+          <tr><td>-I &lt;dir&gt;</td><td>Add include path</td></tr>
+          <tr><td>-L &lt;dir&gt; -l&lt;lib&gt;</td><td>Linker path / library</td></tr>
+          <tr><td>--emit=asm|llvm|obj</td><td>Emit specific intermediate</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>Building the compiler (from repo)</h2>
+      <pre><code>git clone https://github.com/c-to-the-power-of-plus-plus/source.git
+cd source
+# run the provided Makefile
+make
+# run tests
+make test
+</code></pre>
+      <p class="muted">Use environment variables like CC and AR to customize the toolchain used to bootstrap gpcc where supported by the Makefile.</p>
+    </section>
+
+    <section class="card">
+      <h2>Cross-compilation and linking</h2>
+      <p>gpcc delegates most linking to the platform linker (ld or gold). For cross-compilation:</p>
+      <pre><code># Example: targetting arm-linux
+export CC=arm-linux-gnueabihf-gcc
+make
+</code></pre>
+    </section>
+
+    <section class="card">
+      <h2>Troubleshooting</h2>
+      <ul>
+        <li><strong>Undefined reference at link time</strong> — ensure you passed libraries with <code>-l</code> and search paths with <code>-L</code>.</li>
+        <li><strong>Build fails on missing header</strong> — install development headers or add include path with <code>-I</code>.</li>
+        <li><strong>Segfault in generated binary</strong> — re-run with <code>-g</code> and inspect with gdb; ensure pointer/FFI boundaries are correct when mixing with C.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Examples</h2>
+      <pre><code>// build and run
+gpcc -O2 -o hello hello.cp
+./hello
+
+// build library
+gpcc -c lib.c -o lib.o
+ar rcs libmylib.a lib.o
+gpcc main.cp -L. -lmylib -o app
+</code></pre>
+    </section>
+  </main>
+
+  <footer style="text-align:center;padding:18px;color:#6b7280">Check the GitHub repository for issues, release artifacts, and CONTRIBUTING.md.</footer>
+</body>
+</html>

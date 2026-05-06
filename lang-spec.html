@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>C^{++} Language Specification (summary)</title>
+  <style>
+    body{font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;background:#f8fbff;color:#0b1220;margin:0}
+    header{background:#fff;padding:12px 16px;border-bottom:1px solid #e6eef8}
+    .wrap{max-width:980px;margin:20px auto;padding:0 16px}
+    .card{background:#fff;padding:16px;border-radius:10px;margin-bottom:12px;box-shadow:0 8px 20px rgba(18,43,78,0.04)}
+    h2{margin-top:0}
+    pre{background:#0b1220;color:#e6f0ff;padding:12px;border-radius:8px;overflow:auto}
+    table{border-collapse:collapse;width:100%}
+    td,th{padding:8px;border-bottom:1px solid #eef6ff}
+  </style>
+</head>
+<body>
+  <header><h1>C<sup>++</sup> — Language Spec (summary)</h1></header>
+
+  <main class="wrap">
+    <section class="card">
+      <h2>Design goals</h2>
+      <ul>
+        <li>Preserve compatibility with existing C where practical.</li>
+        <li>Add safer default constructs (optional ownership/borrow semantics).</li>
+        <li>Small runtime and clear ABI for systems programming.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Core syntax</h2>
+      <p>C<sup>++</sup> uses familiar C-like syntax with a couple of high-level extensions.</p>
+
+      <h3>Function</h3>
+      <pre><code>func add(a: int, b: int) : int {
+  return a + b;
+}
+</code></pre>
+
+      <h3>Printing and std helpers</h3>
+      <pre><code>println("value:", 42)
+</code></pre>
+
+      <h3>Pattern matching</h3>
+      <pre><code>match (x) {
+  case 0: println("zero")
+  case 1: println("one")
+  case _: println("other")
+}
+</code></pre>
+    </section>
+
+    <section class="card">
+      <h2>Types</h2>
+      <table>
+        <thead><tr><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>int</td><td>Signed integer (target-dependent width, defaults to 64-bit on 64-bit targets)</td></tr>
+          <tr><td>u32, u64</td><td>Explicit unsigned widths</td></tr>
+          <tr><td>float, double</td><td>Floating point types</td></tr>
+          <tr><td>ptr T</td><td>Raw pointer to T compatible with C pointers</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>Interoperability with C</h2>
+      <p>C<sup>++</sup> aims for easy interop with existing C code. Use the <code>extern</code> keyword for linking C functions and headers. The ABI follows standard C ABI for primitive types and pointers.</p>
+    </section>
+
+    <section class="card">
+      <h2>Examples</h2>
+      <pre><code>// factorial.cp
+func fact(n: int) : int {
+  if (n <= 1) {
+    return 1;
+  }
+  return n * fact(n - 1);
+}
+
+func main() : int {
+  println("6! =", fact(6));
+  return 0;
+}
+</code></pre>
+      <p class="muted">See gpcc compiler guide for build and linking examples.</p>
+    </section>
+  </main>
+
+  <footer style="text-align:center;padding:18px;color:#6b7280">This spec page is a summary — maintain a canonical spec in the repository (markdown) and link into it from here for full details.</footer>
+</body>
+</html>
